@@ -3,6 +3,7 @@ ExporterBundle
 
 Symfony2 exporter bundle
 
+
 Instalation
 ===========
 
@@ -34,3 +35,6 @@ Enable the bundle in your application kernel:
 
 Now the Bundle is installed.
 
+
+How to use
+==========

@@ -1,0 +1,4 @@
+services:
+    idci_exporter.manager:
+        class: IDCI\Bundle\ExporterBundle\Service\Manager
+        arguments: [@service_container]
