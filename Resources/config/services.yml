@@ -2,3 +2,7 @@ services:
     idci_exporter.manager:
         class: IDCI\Bundle\ExporterBundle\Service\Manager
         arguments: [@service_container]
+
+    idci_exporter.transformer_twig:
+        class: IDCI\Bundle\ExporterBundle\Transformer\TwigTransformer
+        arguments: [@templating]
