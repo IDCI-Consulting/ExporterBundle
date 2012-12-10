@@ -23,6 +23,27 @@ class Configuration implements ConfigurationInterface
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
         // more information on that topic.
+        $rootNode
+            ->children()
+                ->arrayNode('entities')
+                    ->useAttributeAsKey('key')
+                    ->prototype('array')
+                        ->children()
+                            ->arrayNode('formats')
+                                ->useAttributeAsKey('key')
+                                ->prototype('array')
+                                    ->children()
+                                        ->scalarNode('transformer')->defaultValue('idci_exporter.transformer_twig')->cannotBeEmpty()->end()
+                                        ->scalarNode('template_path')->cannotBeEmpty()->end()
+                                        ->scalarNode('template_name_format')->defaultValue('export.%s.twig')->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
 
         return $treeBuilder;
     }

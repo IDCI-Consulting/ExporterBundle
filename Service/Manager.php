@@ -17,13 +17,21 @@ class Manager
      * guessTransformer
      *
      * @param Object $entity
+     * @param string $format
      * @return Transformer
      */
-    public function guessTransformer($entity)
+    public function guessTransformer($entity, $format)
     {
-        $defaultTransformerService = 'idci_exporter.transformer_twig';
+        // By default
+        $transformService = 'idci_exporter.transformer_twig';
 
-        return $this->container->get($defaultTransformerService);
+        $configuration = $this->container->getParameter('entitiesConfiguration');
+        if(isset($configuration[get_class($entity)]['formats'][$format])) {
+            $formatConfiguration = $configuration[get_class($entity)]['formats'][$format];
+            $transformService = $formatConfiguration['transformer'];
+        }
+
+        return $this->container->get($transformService);
     }
 
     /**
@@ -39,7 +47,7 @@ class Manager
 
         $export->buildHeader();
         foreach($entities as $entity) {
-            $transformer = $this->guessTransformer($entity);
+            $transformer = $this->guessTransformer($entity, $format);
             $export->addContent($transformer->transform($entity, $format));
         }
         $export->buildFooter();
