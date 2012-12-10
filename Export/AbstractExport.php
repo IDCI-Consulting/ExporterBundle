@@ -55,7 +55,7 @@ abstract class AbstractExport
     public function addContent($content)
     {
         try {
-            $this->setContent($this->getContent().PHP_EOL.$content);
+            $this->setContent($this->getContent().$content);
         } catch(\Exception $e) {
              die('TODO: throw an exception if $content can\'t be concateneted');
         }

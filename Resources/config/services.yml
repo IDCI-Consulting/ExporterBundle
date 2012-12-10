@@ -5,4 +5,4 @@ services:
 
     idci_exporter.transformer_twig:
         class: IDCI\Bundle\ExporterBundle\Transformer\TwigTransformer
-        arguments: [@templating]
+        arguments: [@service_container]

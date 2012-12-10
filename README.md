@@ -38,3 +38,16 @@ Now the Bundle is installed.
 
 How to use
 ==========
+
+The default export is based on twig templates. So you have to create a directory
+in `Resources/exporter/EntityName`. Then create needed templates which convert
+your entity into a specific format (csv, ics, json, xml for the moment) like this
+
+  * export.csv.twig
+  * export.ics.twig
+  * export.json.twig
+  * export.xml.twig
+
+Finaly simply use the service as follow to export your entities into the given format:
+
+    $this->container->get('idci_exporter.manager')->export($entities, $format);
