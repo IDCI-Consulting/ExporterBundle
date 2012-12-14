@@ -8,11 +8,17 @@ class JsonExport extends AbstractExport
 
     public function buildHeader()
     {
-        $this->addContent('{'.PHP_EOL);
+        $this->setContent('{'.PHP_EOL.'"events": [');
     }
 
     public function buildFooter()
     {
-        $this->addContent('}');
+        $this->setContent($this->getContent().'] }');
+    }
+
+    public function addContent($content)
+    {
+        $glue = $this->getCount() > 0 ? ',' : '';
+        parent::addContent($glue.$content);
     }
 }

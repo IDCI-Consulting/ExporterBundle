@@ -6,6 +6,15 @@ abstract class AbstractExport
 {
     protected $content;
     protected $contentType;
+    protected $count;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->setCount(0);
+    }
 
     /**
      * getContent
@@ -38,6 +47,26 @@ abstract class AbstractExport
     }
 
     /**
+     * getCount
+     *
+     * @return integer
+     */
+    public function getCount()
+    {
+        return $this->count;
+    }
+
+    /**
+     * setCount
+     *
+     * @param integer $count
+     */
+    public function setCount($count)
+    {
+        $this->count = $count;
+    }
+
+    /**
      * buildHeader
      */
     public function buildHeader() {}
@@ -56,8 +85,9 @@ abstract class AbstractExport
     {
         try {
             $this->setContent($this->getContent().$content);
+            $this->setCount($this->getCount()+1);
         } catch(\Exception $e) {
-             die('TODO: throw an exception if $content can\'t be concateneted');
+            die('TODO: throw an exception if $content can\'t be concateneted');
         }
     }
 }

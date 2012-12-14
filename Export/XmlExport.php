@@ -8,12 +8,11 @@ class XmlExport extends AbstractExport
 
     public function buildHeader()
     {
-        $this->addContent('<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL);
-        $this->addContent('<entities>'.PHP_EOL);
+        $this->setContent('<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL.'<entities>'.PHP_EOL);
     }
 
     public function buildFooter()
     {
-        $this->addContent('</entities>');
+        $this->setContent($this->getContent().'</entities>');
     }
 }
