@@ -13,7 +13,7 @@ class CsvExport extends AbstractExport
      */
     public function addContent($content)
     {
-        $content = trim( preg_replace( '/\s+/', ' ', $content ) );
+        $content = trim(preg_replace('/\s+/', ' ', $content));
         parent::addContent($content.PHP_EOL);
     }
 }
