@@ -39,11 +39,12 @@ class Manager
      *
      * @param DoctrineCollection $entities
      * @param string $format
+     * @param array $params
      * @return ExportResult
      */
-    public function export($entities, $format)
+    public function export($entities, $format, $params = array())
     {
-        $export = ExportFactory::getInstance($format);
+        $export = ExportFactory::getInstance($format, $params);
 
         $export->buildHeader();
         foreach($entities as $entity) {

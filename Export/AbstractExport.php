@@ -2,17 +2,23 @@
 
 namespace IDCI\Bundle\ExporterBundle\Export;
 
+use Symfony\Component\HttpFoundation\ParameterBag;
+
 abstract class AbstractExport
 {
+    protected $parameters;
     protected $content;
     protected $contentType;
     protected $count;
 
     /**
      * Constructor
+     *
+     * @param array $params
      */
-    public function __construct()
+    public function __construct($params = array())
     {
+        $this->parameters = new ParameterBag((array)$params);
         $this->setCount(0);
     }
 

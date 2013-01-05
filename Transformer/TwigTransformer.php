@@ -62,7 +62,7 @@ class TwigTransformer implements TransformerInterface
 
         $configuration = $this->container->getParameter('entitiesConfiguration');
         if(isset($configuration[get_class($entity)]['formats'][$format]['template_name_format'])) {
-            $templatePath = $configuration[get_class($entity)]['formats'][$format]['template_name_format'];
+            $templateNameFormat = $configuration[get_class($entity)]['formats'][$format]['template_name_format'];
         }
 
         return $templateNameFormat;
