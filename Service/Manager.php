@@ -54,13 +54,12 @@ class Manager
     public function getEntityConfiguration($entity)
     {
         $configuration = $this->container->getParameter('exporterConfiguration');
-        $entityClass = get_class($entity);
+        $reflectionClass = $this->getEntityReflectionClass($entity);
         foreach($configuration['entities'] as $entityConfiguration) {
-            if($entityConfiguration['class'] == $entityClass) {
+            if($entityConfiguration['class'] == $reflectionClass->getName()) {
                 return $entityConfiguration;
             }
         }
-
         throw new UndefinedExportableEntityException();
     }
 

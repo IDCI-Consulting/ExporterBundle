@@ -65,21 +65,27 @@ Then declare it for a given format like this:
 
     idci_exporter:
         entities:
-            "My\\Entity\\Namespaced\\Name":
+           entity_reference:
+                class: "My\\Entity\\Namespaced\\Name"
                 formats:
-                    csv:
-                        transformer: "myTransformerServiceName"
+                    jsonp:
+                        transformer:
+                            service: "myTransformerServiceName"
 
 Double slashs are used to prevent from special characters issues.
 If you want to change the TwigTransformer template path or the template name:
 
     idci_exporter:
         entities:
-            "My\\Entity\\Namespaced\\Name":
+           entity_reference:
+                class: "My\\Entity\\Namespaced\\Name"
                 formats:
-                    xml:
-                        template_path: "my/new/template/path"
-                        template_name_format: "myFormat.%s.ext"
+                    jsonp:
+                        transformer:
+                            service: "myTransformerServiceName"
+                            options:
+                                template_path: "my/new/template/path"
+                                template_name_format: "myFormat.%s.ext"
 
 By default template path is looking in the entity bundle dir `Resources/exporter/EntityName/`.
 And the template name format looks like `export.%s.twig` with %s replaced by the given format.0
