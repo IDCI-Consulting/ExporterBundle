@@ -32,6 +32,6 @@ class IDCIExporterExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        $container->setParameter('entitiesConfiguration', $config['entities']);
+        $container->setParameter('exporterConfiguration', $config);
     }
 }

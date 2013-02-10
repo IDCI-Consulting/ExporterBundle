@@ -32,14 +32,11 @@ class TwigTransformer implements TransformerInterface
     }
 
     /**
-     * Is a proxy class
-     *
-     * @param ReflectionClass $reflection
-     * @return boolean
+     * getExporterManager
      */
-    public static function isProxyClass(\ReflectionClass $reflection)
+    public function getExporterManager()
     {
-        return in_array('Doctrine\ORM\Proxy\Proxy', array_keys($reflection->getInterfaces()));
+        return $this->container->get('idci_exporter.manager');
     }
 
     /**
@@ -51,19 +48,23 @@ class TwigTransformer implements TransformerInterface
      */
     public function getTemplatePath($entity, $format)
     {
-        $reflection = new \ReflectionClass($entity);
-        if(self::isProxyClass($reflection) && $reflection->getParentClass()) {
-            $reflection = $reflection->getParentClass();
-        }
+        $reflection = $this
+            ->getExporterManager()
+            ->getEntityReflectionClass($entity)
+        ;
+
         // By default
         $templatePath = sprintf('%s/../Resources/exporter/%s',
             dirname($reflection->getFilename()),
             $reflection->getShortName()
         );
 
-        $configuration = $this->container->getParameter('entitiesConfiguration');
-        if(isset($configuration[$reflection->getName()]['formats'][$format]['template_path'])) {
-            $templatePath = $configuration[$reflection->getName()]['formats'][$format]['template_path'];
+        $transformerOptions = $this
+            ->getExporterManager()
+            ->getEntityTransformerOptions($entity, $format)
+        ;
+        if(isset($transformerOptions['template_path'])) {
+            $templatePath = $transformerOptions['template_path'];
         }
 
         return $templatePath;
@@ -78,16 +79,21 @@ class TwigTransformer implements TransformerInterface
      */
     public function getTemplateNameFormat($entity, $format)
     {
-        $reflection = new \ReflectionClass($entity);
-        if(self::isProxyClass($reflection) && $reflection->getParentClass()) {
-            $reflection = $reflection->getParentClass();
-        }
+        $reflection = $this
+            ->getExporterManager()
+            ->getEntityReflectionClass($entity)
+        ;
+
         // By default
         $templateNameFormat = 'export.%s.twig';
 
-        $configuration = $this->container->getParameter('entitiesConfiguration');
-        if(isset($configuration[$reflection->getName()]['formats'][$format]['template_name_format'])) {
-            $templateNameFormat = $configuration[$reflection->getName()]['formats'][$format]['template_name_format'];
+        $transformerOptions = $this
+            ->getExporterManager()
+            ->getEntityTransformerOptions($entity, $format)
+        ;
+
+        if(isset($transformerOptions['template_name_format'])) {
+            $templateNameFormat = $transformerOptions['template_name_format'];
         }
 
         return $templateNameFormat;
