@@ -155,7 +155,7 @@ class Manager
 
         $reflectionClass = $this->getEntityReflectionClass($repository);
         if($reflectionClass->hasMethod('extract')) {
-            return $repository->extract($params);
+            return $repository->extract(self::cleanParams($params));
         }
 
         throw new MissingRepositoryExtractFunctionException();
@@ -191,7 +191,10 @@ class Manager
      */
     public function export($entities, $format, $params = array())
     {
-        $export = ExportFactory::getInstance($format, $params);
+        $export = ExportFactory::getInstance(
+            $format,
+            self::cleanParams($params)
+        );
 
         $export->buildHeader();
         foreach($entities as $entity) {
@@ -201,5 +204,23 @@ class Manager
         $export->buildFooter();
 
         return $export;
+    }
+
+    /**
+     * Clean Params
+     *
+     * @param array $params
+     * @return array
+     */
+    static protected function cleanParams($params)
+    {
+        $clean = array();
+        foreach($params as $k => $v) {
+            if($v != '') {
+                $clean[$k] = $v;
+            }
+        }
+
+        return $clean;
     }
 }
