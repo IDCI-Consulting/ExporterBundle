@@ -11,6 +11,8 @@ namespace IDCI\Bundle\ExporterBundle\Export;
 
 class JsonpExport extends JsonExport
 {
+    protected $contentType = 'text/javascript';
+
     public function buildHeader()
     {
         $callback = $this->parameters->get('callback');
