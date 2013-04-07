@@ -11,7 +11,7 @@ namespace IDCI\Bundle\ExporterBundle\Export;
 
 class JsonpExport extends JsonExport
 {
-    protected $contentType = 'text/javascript';
+    protected $contentType = 'application/javascript';
 
     public function buildHeader()
     {
