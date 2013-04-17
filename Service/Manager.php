@@ -11,7 +11,6 @@ namespace IDCI\Bundle\ExporterBundle\Service;
 
 use IDCI\Bundle\ExporterBundle\Export\ExportFactory;
 use IDCI\Bundle\ExporterBundle\Exceptions\UndefinedExportableEntityException;
-use IDCI\Bundle\ExporterBundle\Exceptions\MissingRepositoryExtractFunctionException;
 
 class Manager
 {
@@ -157,8 +156,8 @@ class Manager
         if($reflectionClass->hasMethod('extract')) {
             return $repository->extract(self::cleanParams($params));
         }
-
-        throw new MissingRepositoryExtractFunctionException();
+        
+        return $repository->findAll();
     }
 
     /**
