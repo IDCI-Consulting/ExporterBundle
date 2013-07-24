@@ -29,15 +29,15 @@ class Manager
     /**
      * getEntityReferenceConfiguration
      *
-     * @param string $entity_reference
+     * @param string $entityReference
      * @return array
      * @throw UndefinedExportableEntityException
      */
-    public function getEntityReferenceConfiguration($entity_reference)
+    public function getEntityReferenceConfiguration($entityReference)
     {
         $configuration = $this->container->getParameter('exporterConfiguration');
-        if(isset($configuration['entities'][$entity_reference])) {
-            return $configuration['entities'][$entity_reference];
+        if(isset($configuration['entities'][$entityReference])) {
+            return $configuration['entities'][$entityReference];
         }
 
         throw new UndefinedExportableEntityException();
@@ -102,12 +102,12 @@ class Manager
     /**
      * guessEntityRepository
      *
-     * @param string $entity_reference
+     * @param string $entityReference
      * @return Repository
      */
-    public function guessEntityRepository($entity_reference)
+    public function guessEntityRepository($entityReference)
     {
-        $entityConfiguration = $this->getEntityReferenceConfiguration($entity_reference);
+        $entityConfiguration = $this->getEntityReferenceConfiguration($entityReference);
         $class = $entityConfiguration['class'];
         $em = $this->getEntityManager();
 
@@ -144,13 +144,13 @@ class Manager
     /**
      * extract
      *
-     * @param string $entity_reference
+     * @param string $entityReference
      * @param array $params
      * @return DoctrineCollection
      */
-    public function extract($entity_reference, $params = array())
+    public function extract($entityReference, $params = array())
     {
-        $repository = $this->guessEntityRepository($entity_reference);
+        $repository = $this->guessEntityRepository($entityReference);
 
         $reflectionClass = $this->getEntityReflectionClass($repository);
         if($reflectionClass->hasMethod('extract')) {
