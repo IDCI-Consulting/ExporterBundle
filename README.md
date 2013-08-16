@@ -56,13 +56,15 @@ idci_exporter:
 
 By default, the export use twig engine to create exported files. We will see later
 that you can create your own transformer. For the moment create a directory
-in `YourBundle/Resources/exporter/EntityName`. Then create needed templates which convert
+in `YourBundle/Resources/exporter/EntityName`. Then create the needed templates which convert
 your entity into a specific format (csv, ics, json, xml for the moment) like this
 
   * export.csv.twig
   * export.ics.twig
   * export.json.twig
   * export.xml.twig
+
+Within your template you should usually use the twig variable `entity` such as `{{ entity.id }}`.
 
 Finaly simply use the service as follow to export your entities into the given format:
 
@@ -247,11 +249,3 @@ Now you can query your entities like this:
 or
 
     http://mydomaine/api/my_entity_reference.xml
-
-
-
-Todo
-====
-
- * Create a commande line to export entity in bash.
- 
