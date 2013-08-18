@@ -146,7 +146,7 @@ idci_exporter:
 Use the API
 ===========
 
-This bundle help you to get your entities in a given format throw a HTTP request.
+This bundle help you to get your entities in a given format via HTTP requests.
 To do that, add its controller in the `app/config/routing.yml` like this:
 
 ```yml
