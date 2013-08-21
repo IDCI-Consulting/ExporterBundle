@@ -23,8 +23,8 @@ use Symfony\Component\HttpFoundation\Response;
 class ApiController extends Controller
 {
     /**
-     * @Route("/query", name="exporter_api_norewrite", defaults={"entity_reference"="null", "_format"="xml"})
-     * @Route("/{entity_reference}.{_format}", name="exporter_api", defaults={"_format"="xml"})
+     * @Route("/query", name="exporter_api_norewrite", defaults={"entityReference"="null", "_format"="xml"})
+     * @Route("/{entityReference}.{_format}", name="exporter_api", defaults={"_format"="xml"})
      */
     public function indexAction(Request $request, $entityReference)
     {
@@ -34,7 +34,7 @@ class ApiController extends Controller
         }
 
         if($entityReference == "null") {
-            $entityReference = $request->query->get('entity_reference');
+            $entityReference = $request->query->get('entityReference');
         }
 
         $entities = $this->get('idci_exporter.manager')->extract(
