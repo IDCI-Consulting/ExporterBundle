@@ -14,7 +14,7 @@ First add the dependency in your `composer.json` file:
 ```json
 "require": {
     ...
-    "idci/exporter-bundle": "dev-master"
+    "idci/exporter-bundle": "1.0"
 },
 ```
 
