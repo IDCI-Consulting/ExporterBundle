@@ -56,7 +56,7 @@ class TwigTransformer implements TransformerInterface
         $bundlePath = explode('/Entity/',$reflection->getFilename());
         // By default
         $templatePath = sprintf('%s/Resources/exporter/%s',
-            $bundlePath,
+            $bundlePath[0],
             $reflection->getShortName()
         );
 
