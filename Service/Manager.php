@@ -59,7 +59,7 @@ class Manager
                 return $entityConfiguration;
             }
         }
-        throw new UndefinedExportableEntityException();
+        throw new UndefinedExportableEntityException($entity);
     }
 
     /**
