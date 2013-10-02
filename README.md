@@ -171,7 +171,7 @@ idci_exporter:
 ```
 
 If you get a `UndefinedExportableEntityException` this mean that you don't have
-well defined the export config for your Entity.
+well defined the export config for your Entity (The url might not match the entity_reference parameter for example).
 
 Then you have to create an `extract` function in your EntityRepository which return
 a `DoctrineCollection`. This function get `$params` variable as arguments which
