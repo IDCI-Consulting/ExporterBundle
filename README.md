@@ -244,7 +244,7 @@ public function extract($params)
 
 Now you can query your entities like this:
 
-    http://mydomaine/api/query?entity_reference=my_entity_reference&format=xml
+    http://mydomaine/api/query?entityReference=my_entity_reference&format=xml
 
 or
 
